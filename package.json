@@ -363,6 +363,7 @@
     "!dist/extensions/msteams/**",
     "!dist/extensions/muse/**",
     "!dist/extensions/mxc/**",
+    "!dist/extensions/nace/**",
     "!dist/extensions/nextcloud-talk/**",
     "!dist/extensions/nostr/**",
     "!dist/extensions/novita/**",

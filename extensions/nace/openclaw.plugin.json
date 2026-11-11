@@ -1,0 +1,248 @@
+{
+  "id": "nace",
+  "name": "Nace Drex",
+  "description": "Typed decision provider for Nace Drex models.",
+  "categories": [
+    "developer-tools"
+  ],
+  "enabledByDefault": false,
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "decisionProviders": [
+      "nace"
+    ]
+  },
+  "configContracts": {
+    "secretInputs": {
+      "bundledDefaultEnabled": false,
+      "paths": [
+        {
+          "path": "apiKey",
+          "expected": "string",
+          "ownerKind": "capability"
+        }
+      ]
+    }
+  },
+  "uiHints": {
+    "apiKey": {
+      "label": "Nace API credential",
+      "help": "Select a SecretRef in Settings → Secrets. Create a key at console.nace.ai; never paste credentials in chat.",
+      "sensitive": true
+    },
+    "baseUrl": {
+      "label": "Nace API base URL",
+      "help": "Advanced. Defaults to https://console.nace.ai/v1. Accepts https://console.nace.ai/v1, https://drex.nace.ai/v1, or an http(s) loopback origin such as a local Drex dev server or logging proxy.",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "type": "object",
+        "required": [
+          "source",
+          "provider",
+          "id"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "env",
+              "store",
+              "file",
+              "exec"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          }
+        },
+        "additionalProperties": false
+      },
+      "baseUrl": {
+        "type": "string",
+        "maxLength": 128,
+        "pattern": "^(?:https://(?:console|drex)\\.nace\\.ai|https?://(?:localhost|127\\.0\\.0\\.1|\\[::1\\])(?::[0-9]{1,5})?)(?:/v1)?/?$"
+      }
+    },
+    "additionalProperties": false
+  },
+  "providers": [
+    "nace"
+  ],
+  "modelCatalog": {
+    "providers": {
+      "nace": {
+        "models": [
+          {
+            "id": "drex-latest",
+            "name": "Drex",
+            "baseUrl": "https://console.nace.ai/v1",
+            "inference": {
+              "chat": false,
+              "decision": {
+                "protocol": "nace-systemone",
+                "input": [
+                  "text",
+                  "image"
+                ],
+                "questions": {
+                  "boolean": {
+                    "probabilities": "boolean",
+                    "abstention": false
+                  },
+                  "choice": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  },
+                  "score": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  }
+                },
+                "reasoning": {
+                  "modes": ["auto"]
+                },
+                "confidence": "provider-specific",
+                "limits": {
+                  "maxQuestions": 512,
+                  "image": {
+                    "maxBytes": 3000000,
+                    "mimeTypes": ["image/png", "image/jpeg", "image/webp"],
+                    "remoteUrls": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "drex-max-v1.1",
+            "name": "Drex Max v1.1",
+            "baseUrl": "https://console.nace.ai/v1",
+            "inference": {
+              "chat": false,
+              "decision": {
+                "protocol": "nace-systemone",
+                "input": [
+                  "text",
+                  "image"
+                ],
+                "questions": {
+                  "boolean": {
+                    "probabilities": "boolean",
+                    "abstention": false
+                  },
+                  "choice": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  },
+                  "score": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  }
+                },
+                "reasoning": {
+                  "modes": ["auto"]
+                },
+                "confidence": "provider-specific",
+                "limits": {
+                  "maxQuestions": 512,
+                  "maxRequestTokens": 262144,
+                  "image": {
+                    "maxBytes": 3000000,
+                    "mimeTypes": ["image/png", "image/jpeg", "image/webp"],
+                    "remoteUrls": false
+                  }
+                },
+                "billing": {
+                  "unit": "tokens",
+                  "source": "provider-docs",
+                  "usdPerMillion": {
+                    "input": 0.03,
+                    "output": 0
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "drex-v2.0",
+            "name": "Drex 2.0",
+            "baseUrl": "https://console.nace.ai/v1",
+            "inference": {
+              "chat": false,
+              "decision": {
+                "protocol": "nace-systemone",
+                "input": [
+                  "text"
+                ],
+                "questions": {
+                  "boolean": {
+                    "probabilities": "boolean",
+                    "abstention": false
+                  },
+                  "choice": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  },
+                  "score": {
+                    "probabilities": "provider-defined",
+                    "abstention": false,
+                    "minOptions": 2,
+                    "maxOptions": 255
+                  }
+                },
+                "reasoning": {
+                  "modes": ["auto"]
+                },
+                "confidence": "provider-specific",
+                "limits": {
+                  "maxQuestions": 512,
+                  "maxStateAndQuestionTokens": 262144
+                },
+                "billing": {
+                  "unit": "tokens",
+                  "source": "provider-docs",
+                  "usdPerMillion": {
+                    "input": 0.03,
+                    "output": 0
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "authScope": "plugin"
+      }
+    }
+  },
+  "modelPricing": {
+    "providers": {
+      "nace": {
+        "external": false
+      }
+    }
+  }
+}

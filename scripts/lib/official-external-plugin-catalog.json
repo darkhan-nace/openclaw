@@ -613,6 +613,24 @@
       }
     },
     {
+      "name": "@openclaw/nace",
+      "description": "OpenClaw Nace Drex typed decision provider",
+      "source": "official",
+      "kind": "plugin",
+      "openclaw": {
+        "plugin": {
+          "id": "nace",
+          "label": "Nace Drex"
+        },
+        "install": {
+          "clawhubSpec": "clawhub:@openclaw/nace",
+          "npmSpec": "@openclaw/nace",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.11.3"
+        }
+      }
+    },
+    {
       "name": "@openclaw/onnx",
       "description": "Local ONNX decision models for OpenClaw",
       "source": "official",
