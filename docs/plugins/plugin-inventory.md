@@ -214,7 +214,7 @@ Each entry lists the package, distribution route, and description.
 
 ## Official external packages
 
-102 plugins
+103 plugins
 
 - **[abliteration](/plugins/reference/abliteration)** (`@openclaw/abliteration-provider`) - npm or ClawHub: `@openclaw/abliteration-provider`. OpenClaw Abliteration provider plugin.
 
@@ -331,6 +331,8 @@ Each entry lists the package, distribution route, and description.
 - **[muse](/plugins/reference/muse)** (`@openclaw/muse`) - npm or ClawHub: `@openclaw/muse`. Runs Meta models through the Muse Code CLI.
 
 - **[mxc](/plugins/reference/mxc)** (`@openclaw/mxc-sandbox`) - npm or ClawHub: `@openclaw/mxc-sandbox`. OS-level sandboxed tool execution via MXC: runs commands in a Windows ProcessContainer with configured MXC policy files.
+
+- **[nace](/plugins/reference/nace)** (`@openclaw/nace`) - npm or ClawHub: `@openclaw/nace`. Typed decision provider for Nace Drex models.
 
 - **[nextcloud-talk](/plugins/reference/nextcloud-talk)** (`@openclaw/nextcloud-talk`) - npm or ClawHub: `@openclaw/nextcloud-talk`. OpenClaw Nextcloud Talk channel plugin for conversations.
 

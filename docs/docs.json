@@ -1870,6 +1870,7 @@
                       "plugins/llama-cpp",
                       "plugins/memory-lancedb",
                       "plugins/memory-wiki",
+                      "plugins/nace",
                       "plugins/onnx",
                       "plugins/subq",
                       "plugins/typesafe"

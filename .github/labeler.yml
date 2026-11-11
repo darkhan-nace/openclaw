@@ -49,6 +49,12 @@
           - "extensions/typesafe/**"
           - "docs/plugins/typesafe.md"
           - "docs/plugins/reference/typesafe.md"
+"plugin: nace":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "extensions/nace/**"
+          - "docs/plugins/nace.md"
+          - "docs/plugins/reference/nace.md"
 "plugin: subq":
   - changed-files:
       - any-glob-to-any-file:

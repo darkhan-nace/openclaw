@@ -48,6 +48,10 @@ Configure the provider plugin before selecting its model:
   Install the plugin candidate from a compatible development checkout and
   configure a Liquid AI API key. Text/JSON and inline image evidence use the
   native Decision endpoint; connecting it does not change the chat model.
+- [Nace Drex](/plugins/nace) connects directly to hosted Drex models. Install and enable the
+  external plugin and configure a protected Nace API key. Text/JSON evidence works on every
+  Drex model, and inline image evidence works on Drex Max. Evaluations send user content to
+  Nace and incur its normal charges.
 - [ONNX](/plugins/onnx) runs local CPU classifiers in a persistent subprocess.
   Follow its development-checkout or compatible-package setup, then explicitly
   download the model or prepare a local export. Inference needs no hosted API credential.
@@ -76,6 +80,9 @@ The current plugins declare these model references:
 
 | Model reference                      | Model                  | Preparation                                            |
 | ------------------------------------ | ---------------------- | ------------------------------------------------------ |
+| `nace/drex-latest`                   | Drex                   | Nace API key; alias for the current Drex Max           |
+| `nace/drex-max-v1.1`                 | Drex Max v1.1          | Nace API key                                           |
+| `nace/drex-v2.0`                     | Drex 2.0               | Nace API key                                           |
 | `onnx/deberta-v3-base-zeroshot-v2.0` | DeBERTa Zero-shot v2   | Download pinned ONNX artifacts                         |
 | `onnx/gliclass-base-v3.0`            | GLiClass Base v3       | Download pinned ONNX artifacts                         |
 | `onnx/gliclass-edge-v3.0`            | GLiClass Edge v3       | Download pinned ONNX artifacts                         |
@@ -92,7 +99,7 @@ The current plugins declare these model references:
 Rerank models have no fixed list: any model you configure under
 `models.providers.rerank` is selectable as `rerank/<model id>`.
 
-The ONNX, SubQ, and TypeSafe AI plugins are currently unpublished candidates. Their setup pages explain
+The Nace Drex, ONNX, SubQ, and TypeSafe AI plugins are currently unpublished candidates. Their setup pages explain
 source-checkout use and the packaged host floor. The table describes the plugins' declared models,
 not which artifacts or credentials are ready on your machine.
 
@@ -349,6 +356,7 @@ Provider limits differ:
 | Provider    | Choice alternatives | Score levels | Additional limits                                                                  |
 | ----------- | ------------------- | ------------ | ---------------------------------------------------------------------------------- |
 | ONNX        | 2–64                | 2–64         | Up to 32 questions; 512 tokens per encoded input; one MiB of compiled batch inputs |
+| Nace Drex   | 2–255               | 2–255        | Text/JSON on every model; one inline image on Drex Max; Nace's 4 MiB request body  |
 | SubQ        | 2–255               | 2–10         | Up to 16 questions; text/JSON state; question IDs at most 100 characters           |
 | TypeSafe AI | 2–255               | 2–10         | Subject to the host's batch limits and the vendor input contract                   |
 
