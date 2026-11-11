@@ -84,6 +84,15 @@ const nativePluginUiLogs = ["", "native-ui-opt-out/"]
     "native-ui-opt-out/update.err",
     "native-ui-opt-out/candidate-gateway.log",
   ]);
+const advisorDefaultOnLogs = ["omitted", "false", "true"].flatMap((policy) =>
+  [
+    "baseline-proof.json",
+    "candidate-proof.json",
+    "update.json",
+    "update.err",
+    "candidate-gateway.log",
+  ].map((name) => `advisor-default-on-${policy}/${name}`),
+);
 const logNames = [
   "baseline-install.log",
   "baseline-companion.json",
@@ -139,6 +148,7 @@ const logNames = [
   "legacy-operator-cron-history-proof.json",
   ...pluginPolicyLogs,
   ...nativePluginUiLogs,
+  ...advisorDefaultOnLogs,
   ...nativeAssignmentLogs,
   "webhooks-only-policy/update.err",
   "webhooks-only-policy/gateway.log",

@@ -13,6 +13,7 @@ source scripts/e2e/lib/upgrade-survivor/plugin-dependency-fixtures.sh
 source scripts/e2e/lib/upgrade-survivor/backup-rollback.sh
 source scripts/e2e/lib/upgrade-survivor/legacy-operator-plugin-policy.sh
 source scripts/e2e/lib/upgrade-survivor/native-plugin-ui.sh
+source scripts/e2e/lib/upgrade-survivor/advisor-default-on.sh
 source scripts/e2e/lib/upgrade-survivor/missing-load-path.sh
 source scripts/e2e/lib/upgrade-survivor/paths.sh
 
@@ -2859,6 +2860,7 @@ if [ "$SCENARIO" = "legacy-operator-state" ]; then
   fi
   phase prepare-schema-expectation prepare_schema_expectation
   phase capture-backup-rollback capture_backup_rollback
+  phase capture-advisor-default-on capture_advisor_default_on
   if [ "$baseline_version" = "2026.9.2" ]; then
     phase capture-sole-plugin-policy legacy_operator_plugin_policy capture
   fi
@@ -3079,6 +3081,11 @@ if [ "$SCENARIO" = "legacy-operator-state" ]; then
   fi
   if [ "$baseline_version" = "2026.9.4" ] && [ "$UPDATE_RESTART_MODE" = "manual" ]; then
     phase assert-restored-index-rollback node scripts/e2e/lib/upgrade-survivor/legacy-operator-restored-index.mjs rollback "$ARTIFACT_ROOT/backup-rollback.json"
+  fi
+  if advisor_default_on_enabled; then
+    for advisor_policy in $ADVISOR_POLICIES; do
+      phase "verify-advisor-default-on-$advisor_policy" verify_advisor_default_on "$advisor_policy"
+    done
   fi
 fi
 

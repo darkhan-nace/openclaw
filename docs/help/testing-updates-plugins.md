@@ -418,6 +418,16 @@ healthy upgrade. Agent schemas still use their published version. The observer
 opens databases read-only and never triggers migrations or publication. See
 [Schema bumps and older updaters](/reference/database-schemas#schema-bumps-and-older-updaters).
 
+In `manual` mode, a `legacy-operator-state` baseline that ships Advisor off by
+default also proves the Advisor default-on upgrade. Before the main update, the
+lane copies the published install. Each of three fresh states then runs its own
+baseline Gateway, published updater, and candidate Gateway: no
+`plugins.entries.advisor`, `enabled: false`, and `enabled: true`. Through
+`plugins.list`, the omitted case must stay inactive on the baseline and become
+active on the candidate without a config override. The explicit `false` case
+must stay disabled and unloaded; the explicit `true` case must stay active.
+Proofs land in `advisor-default-on-<policy>/`.
+
 The before snapshot also records the baseline's configured agent roster and
 agent-scoped legacy specimens, including session rows, transcript and trajectory
 files, trajectory pointers, and skill-prompt blobs. Model catalogs and unrelated

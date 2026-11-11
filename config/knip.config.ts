@@ -393,6 +393,8 @@ const repositoryScriptEntries = [
   "scripts/e2e/lib/upgrade-survivor/native-assignment-app-server.mjs!",
   // native-plugin-ui.sh invokes fixture creation and packaged upgrade probes through Node.
   "scripts/e2e/lib/upgrade-survivor/native-plugin-ui.mjs!",
+  // advisor-default-on.sh invokes packaged Advisor upgrade probes through Node.
+  "scripts/e2e/lib/upgrade-survivor/advisor-default-on.mjs!",
   // Published driver CI and documented Crabbox runs invoke the native matrix.
   "scripts/e2e/lib/upgrade-survivor/native-systemd.mjs!",
   // package-activation-recovery.sh preloads this observer into the released updater.
